@@ -1,0 +1,58 @@
+{
+  "short_name": "Pilates App",
+  "name": "Application de réservation de cours de Pilates",
+  "description": "Réservez vos cours de Pilates en quelques clics",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo152.png",
+      "type": "image/png",
+      "sizes": "152x152",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo167.png",
+      "type": "image/png",
+      "sizes": "167x167",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo180.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#87CEEB",
+  "background_color": "#FFD700",
+  "prefer_related_applications": false,
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Réserver un cours",
+      "short_name": "Réserver",
+      "description": "Réservez rapidement un cours de Pilates",
+      "url": "/booking",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ]
+}
