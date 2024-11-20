@@ -374,7 +374,15 @@ export default function App() {
   if (!isLoggedIn) {
     return (
       <View style={styles.container}>
-        <View style={styles.contentContainer}>
+        <View style={[styles.contentContainer, { marginTop: 0 }]}>
+          <Text
+            style={[
+              styles.header,
+              { fontSize: 32, marginBottom: 40, color: "#F9F9F9" },
+            ]}
+          >
+            Pilates Studio
+          </Text>
           <Text style={styles.header}>Connexion</Text>
           <TextInput
             style={styles.input}
