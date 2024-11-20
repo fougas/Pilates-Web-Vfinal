@@ -404,196 +404,201 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.mainContainer}
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={true}
-        contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
-        nestedScrollEnabled={true}
-      >
-        <Text style={styles.centeredHeader}>
-          {isAdmin ? "Panneau d'administration" : "Cours de Pilates"}
-        </Text>
+    <div
+      style={{
+        height: "100vh",
+        overflowY: "scroll",
+        WebkitOverflowScrolling: "touch",
+        backgroundColor: "transparent",
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.mainContainer}>
+          <Text style={styles.centeredHeader}>
+            {isAdmin ? "Panneau d'administration" : "Cours de Pilates"}
+          </Text>
 
-        {isAdmin && (
-          <View style={styles.adminContainer}>
+          {isAdmin && (
+            <View style={styles.adminContainer}>
+              <Button
+                title="Ajouter un utilisateur"
+                onPress={() => setShowUserModal(true)}
+              />
+              <FlatList
+                data={users}
+                renderItem={({ item }) => (
+                  <View style={styles.userItem}>
+                    <Text>
+                      {item.username} - {item.isAdmin ? "Admin" : "User"}
+                    </Text>
+                    <Button
+                      title="Supprimer"
+                      onPress={() => deleteUser(item.id)}
+                    />
+                  </View>
+                )}
+                keyExtractor={(item) => item.id}
+                scrollEnabled={false} // Ajoutez cette ligne
+                nestedScrollEnabled={true}
+              />
+            </View>
+          )}
+
+          <Calendar
+            onDayPress={(day) => {
+              setSelectedDate(day.dateString);
+              loadClasses(day.dateString);
+            }}
+            selectedDate={selectedDate}
+          />
+
+          {isAdmin && (
             <Button
-              title="Ajouter un utilisateur"
-              onPress={() => setShowUserModal(true)}
+              title="Ajouter un cours"
+              onPress={() => setShowClassModal(true)}
             />
-            <FlatList
-              data={users}
-              renderItem={({ item }) => (
-                <View style={styles.userItem}>
-                  <Text>
-                    {item.username} - {item.isAdmin ? "Admin" : "User"}
-                  </Text>
+          )}
+
+          <FlatList
+            data={classes[selectedDate] || []}
+            renderItem={renderClass}
+            keyExtractor={(item) => item.id}
+            scrollEnabled={false} // Ajoutez cette ligne
+            nestedScrollEnabled={true}
+            ListEmptyComponent={
+              <Text style={styles.emptyText}>
+                Aucun cours disponible pour cette date
+              </Text>
+            }
+          />
+
+          <Button title="Se déconnecter" onPress={handleLogout} />
+
+          {/* Modal pour ajouter un utilisateur */}
+          <Modal visible={showUserModal} animationType="slide" transparent>
+            <View style={styles.modalOverlay}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>Ajouter un utilisateur</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Nom d'utilisateur"
+                  value={newUser.username}
+                  onChangeText={(text) =>
+                    setNewUser({ ...newUser, username: text })
+                  }
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Mot de passe"
+                  value={newUser.password}
+                  onChangeText={(text) =>
+                    setNewUser({ ...newUser, password: text })
+                  }
+                  secureTextEntry
+                />
+                <TouchableOpacity
+                  style={styles.checkboxContainer}
+                  onPress={() =>
+                    setNewUser({ ...newUser, isAdmin: !newUser.isAdmin })
+                  }
+                >
+                  <Text>Admin</Text>
+                  <View
+                    style={[styles.checkbox, newUser.isAdmin && styles.checked]}
+                  />
+                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                  <Button title="Ajouter" onPress={addUser} />
                   <Button
-                    title="Supprimer"
-                    onPress={() => deleteUser(item.id)}
+                    title="Annuler"
+                    onPress={() => setShowUserModal(false)}
+                    color="red"
                   />
                 </View>
-              )}
-              keyExtractor={(item) => item.id}
-              scrollEnabled={false} // Ajoutez cette ligne
-              nestedScrollEnabled={true}
-            />
-          </View>
-        )}
+              </View>
+            </View>
+          </Modal>
 
-        <Calendar
-          onDayPress={(day) => {
-            setSelectedDate(day.dateString);
-            loadClasses(day.dateString);
-          }}
-          selectedDate={selectedDate}
-        />
-
-        {isAdmin && (
-          <Button
-            title="Ajouter un cours"
-            onPress={() => setShowClassModal(true)}
-          />
-        )}
-
-        <FlatList
-          data={classes[selectedDate] || []}
-          renderItem={renderClass}
-          keyExtractor={(item) => item.id}
-          scrollEnabled={false} // Ajoutez cette ligne
-          nestedScrollEnabled={true}
-          ListEmptyComponent={
-            <Text style={styles.emptyText}>
-              Aucun cours disponible pour cette date
-            </Text>
-          }
-        />
-
-        <Button title="Se déconnecter" onPress={handleLogout} />
-
-        {/* Modal pour ajouter un utilisateur */}
-        <Modal visible={showUserModal} animationType="slide" transparent>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Ajouter un utilisateur</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Nom d'utilisateur"
-                value={newUser.username}
-                onChangeText={(text) =>
-                  setNewUser({ ...newUser, username: text })
-                }
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Mot de passe"
-                value={newUser.password}
-                onChangeText={(text) =>
-                  setNewUser({ ...newUser, password: text })
-                }
-                secureTextEntry
-              />
-              <TouchableOpacity
-                style={styles.checkboxContainer}
-                onPress={() =>
-                  setNewUser({ ...newUser, isAdmin: !newUser.isAdmin })
-                }
-              >
-                <Text>Admin</Text>
-                <View
-                  style={[styles.checkbox, newUser.isAdmin && styles.checked]}
+          {/* Modal pour ajouter un cours */}
+          <Modal visible={showClassModal} animationType="slide" transparent>
+            <View style={styles.modalOverlay}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>Ajouter un cours</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Nom du cours"
+                  value={newClass.name}
+                  onChangeText={(text) =>
+                    setNewClass({ ...newClass, name: text })
+                  }
                 />
-              </TouchableOpacity>
-              <View style={styles.buttonContainer}>
-                <Button title="Ajouter" onPress={addUser} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Heure (ex: 10:00)"
+                  value={newClass.time}
+                  onChangeText={(text) =>
+                    setNewClass({ ...newClass, time: text })
+                  }
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Durée (ex: 60 min)"
+                  value={newClass.duration}
+                  onChangeText={(text) =>
+                    setNewClass({ ...newClass, duration: text })
+                  }
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Capacité"
+                  value={newClass.capacity}
+                  onChangeText={(text) =>
+                    setNewClass({ ...newClass, capacity: text })
+                  }
+                  keyboardType="numeric"
+                />
+                <View style={styles.buttonContainer}>
+                  <Button title="Ajouter" onPress={addClass} />
+                  <Button
+                    title="Annuler"
+                    onPress={() => setShowClassModal(false)}
+                    color="red"
+                  />
+                </View>
+              </View>
+            </View>
+          </Modal>
+
+          {/* Modal pour voir les inscrits */}
+          <Modal visible={showEnrolledModal} animationType="slide" transparent>
+            <View style={styles.modalOverlay}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>
+                  Inscrits au cours {selectedClass?.name}
+                </Text>
+                <FlatList
+                  data={
+                    selectedClass
+                      ? users.filter((u) =>
+                          selectedClass.enrolled.includes(u.id)
+                        )
+                      : []
+                  }
+                  renderItem={({ item }) => <Text>{item.username}</Text>}
+                  keyExtractor={(item) => item.id}
+                  ListEmptyComponent={
+                    <Text style={styles.emptyText}>Aucun inscrit</Text>
+                  }
+                />
                 <Button
-                  title="Annuler"
-                  onPress={() => setShowUserModal(false)}
-                  color="red"
+                  title="Fermer"
+                  onPress={() => setShowEnrolledModal(false)}
                 />
               </View>
             </View>
-          </View>
-        </Modal>
-
-        {/* Modal pour ajouter un cours */}
-        <Modal visible={showClassModal} animationType="slide" transparent>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Ajouter un cours</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Nom du cours"
-                value={newClass.name}
-                onChangeText={(text) =>
-                  setNewClass({ ...newClass, name: text })
-                }
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Heure (ex: 10:00)"
-                value={newClass.time}
-                onChangeText={(text) =>
-                  setNewClass({ ...newClass, time: text })
-                }
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Durée (ex: 60 min)"
-                value={newClass.duration}
-                onChangeText={(text) =>
-                  setNewClass({ ...newClass, duration: text })
-                }
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Capacité"
-                value={newClass.capacity}
-                onChangeText={(text) =>
-                  setNewClass({ ...newClass, capacity: text })
-                }
-                keyboardType="numeric"
-              />
-              <View style={styles.buttonContainer}>
-                <Button title="Ajouter" onPress={addClass} />
-                <Button
-                  title="Annuler"
-                  onPress={() => setShowClassModal(false)}
-                  color="red"
-                />
-              </View>
-            </View>
-          </View>
-        </Modal>
-
-        {/* Modal pour voir les inscrits */}
-        <Modal visible={showEnrolledModal} animationType="slide" transparent>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>
-                Inscrits au cours {selectedClass?.name}
-              </Text>
-              <FlatList
-                data={
-                  selectedClass
-                    ? users.filter((u) => selectedClass.enrolled.includes(u.id))
-                    : []
-                }
-                renderItem={({ item }) => <Text>{item.username}</Text>}
-                keyExtractor={(item) => item.id}
-                ListEmptyComponent={
-                  <Text style={styles.emptyText}>Aucun inscrit</Text>
-                }
-              />
-              <Button
-                title="Fermer"
-                onPress={() => setShowEnrolledModal(false)}
-              />
-            </View>
-          </View>
-        </Modal>
-      </ScrollView>
-    </View>
+          </Modal>
+        </View>
+      </View>
+    </div>
   );
 }

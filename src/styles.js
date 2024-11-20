@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     height: "100%",
     overflowY: "scroll", // Ajouté
     WebkitOverflowScrolling: "touch", // Modifiez cette ligne
-    paddingBottom: 100, // Espace pour le défilement
   },
   adminContainer: {
     minHeight: 200, // Ajustez selon vos besoins
