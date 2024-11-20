@@ -404,7 +404,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles.modalOverlay}>
+    <View style={styles.container}>
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={styles.mainContainer}
