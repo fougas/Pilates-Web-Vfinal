@@ -21,6 +21,10 @@ export const styles = StyleSheet.create({
     height: "auto",
     overscrollBehavior: "auto", // Modifiez cette ligne
   },
+  adminContainer: {
+    minHeight: 200, // Ajustez selon vos besoins
+    marginBottom: 20,
+  },
   contentContainer: {
     flex: 1,
     padding: 20,

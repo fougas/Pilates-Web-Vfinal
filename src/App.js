@@ -417,7 +417,7 @@ export default function App() {
         </Text>
 
         {isAdmin && (
-          <View>
+          <View style={styles.adminContainer}>
             <Button
               title="Ajouter un utilisateur"
               onPress={() => setShowUserModal(true)}
