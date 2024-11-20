@@ -409,7 +409,7 @@ export default function App() {
         style={styles.mainContainer}
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
         nestedScrollEnabled={true}
       >
         <Text style={styles.centeredHeader}>
