@@ -410,6 +410,7 @@ export default function App() {
         scrollEnabled={true}
         showsVerticalScrollIndicator={true}
         contentContainerStyle={{ flexGrow: 1 }}
+        nestedScrollEnabled={true}
       >
         <Text style={styles.centeredHeader}>
           {isAdmin ? "Panneau d'administration" : "Cours de Pilates"}
@@ -435,6 +436,8 @@ export default function App() {
                 </View>
               )}
               keyExtractor={(item) => item.id}
+              scrollEnabled={false} // Ajoutez cette ligne
+              nestedScrollEnabled={true}
             />
           </View>
         )}
@@ -458,6 +461,8 @@ export default function App() {
           data={classes[selectedDate] || []}
           renderItem={renderClass}
           keyExtractor={(item) => item.id}
+          scrollEnabled={false} // Ajoutez cette ligne
+          nestedScrollEnabled={true}
           ListEmptyComponent={
             <Text style={styles.emptyText}>
               Aucun cours disponible pour cette date
