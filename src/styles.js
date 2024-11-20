@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     margin: "0 auto",
     width: "100%",
     height: "100%",
+    minHeight: "100%",
     overflowY: "scroll", // Ajouté
     WebkitOverflowScrolling: "touch", // Modifiez cette ligne
     //paddingBottom: 100, // Espace pour le défilement
