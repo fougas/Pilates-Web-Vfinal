@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     overflowY: "auto", // Ajoutez cette ligne
     WebkitOverflowScrolling: "touch", // Ajoutez cette ligne pour iOS
+    overflow: "hidden",
     // Dégradé multi-étapes pour éviter les teintes verdâtres
     backgroundImage:
       "linear-gradient(180deg, #87CEEB 0%, #B4E1FF 35%, #FFE5B4 70%, #FFD700 100%)",
@@ -18,12 +19,15 @@ export const styles = StyleSheet.create({
     maxWidth: "1200px",
     margin: "0 auto",
     width: "100%",
-    height: "auto",
-    overscrollBehavior: "auto", // Modifiez cette ligne
+    height: "100",
+    overscrollBehavior: "auto",
+    overflowY: "scroll", // Ajouté
+    WebkitOverflowScrolling: "touch", // Modifiez cette ligne
   },
   adminContainer: {
     minHeight: 200, // Ajustez selon vos besoins
     marginBottom: 20,
+    overflowY: "visible",
   },
   contentContainer: {
     flex: 1,
