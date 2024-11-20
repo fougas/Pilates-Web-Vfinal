@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
   TextInput,
@@ -22,8 +21,6 @@ import {
   doc,
 } from "firebase/firestore";
 import { styles } from "./styles";
-import { BrowserRouter } from "react-router-dom";
-import InstallBanner from "./components/InstallBanner";
 // Configuration Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCI7Ajf_9i7LRXeEOxxtNnF5S-x88KgvDw",
