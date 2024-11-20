@@ -21,14 +21,14 @@ export const styles = StyleSheet.create({
     height: "100%",
     overflowY: "scroll", // Ajouté
     WebkitOverflowScrolling: "touch", // Modifiez cette ligne
-    paddingBottom: 100, // Espace pour le défilement
+    // paddingBottom: 100, // Espace pour le défilement
   },
   adminContainer: {
     minHeight: 200, // Ajustez selon vos besoins
     marginBottom: 20,
     overflowY: "visible",
     width: "100%",
-    paddingBottom: 20,
+    //paddingBottom: 20,
   },
   contentContainer: {
     flex: 1,
