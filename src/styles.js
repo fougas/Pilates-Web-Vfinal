@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     minHeight: "100vh",
     width: "100%",
-    overflowY: "auto", // Ajoutez cette ligne
     WebkitOverflowScrolling: "touch", // Ajoutez cette ligne pour iOS
     overflow: "hidden",
     // Dégradé multi-étapes pour éviter les teintes verdâtres
@@ -19,8 +18,7 @@ export const styles = StyleSheet.create({
     maxWidth: "1200px",
     margin: "0 auto",
     width: "100%",
-    height: "100",
-    overscrollBehavior: "auto",
+    height: "100%",
     overflowY: "scroll", // Ajouté
     WebkitOverflowScrolling: "touch", // Modifiez cette ligne
   },
