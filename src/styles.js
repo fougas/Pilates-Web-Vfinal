@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     minHeight: "100vh",
     width: "100%",
+    overflowY: "auto", // Ajoutez cette ligne
+    WebkitOverflowScrolling: "touch", // Ajoutez cette ligne pour iOS
     // Dégradé multi-étapes pour éviter les teintes verdâtres
     backgroundImage:
       "linear-gradient(180deg, #87CEEB 0%, #B4E1FF 35%, #FFE5B4 70%, #FFD700 100%)",
@@ -16,6 +18,8 @@ export const styles = StyleSheet.create({
     maxWidth: "1200px",
     margin: "0 auto",
     width: "100%",
+    height: "auto",
+    overscrollBehavior: "auto", // Modifiez cette ligne
   },
   contentContainer: {
     flex: 1,

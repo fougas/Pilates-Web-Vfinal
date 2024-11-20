@@ -405,7 +405,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.mainContainer}>
+      <ScrollView
+        style={styles.mainContainer}
+        scrollEnabled={true}
+        showsVerticalScrollIndicator={true}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         <Text style={styles.centeredHeader}>
           {isAdmin ? "Panneau d'administration" : "Cours de Pilates"}
         </Text>
