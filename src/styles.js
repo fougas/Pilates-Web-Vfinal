@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     minHeight: "100vh",
     width: "100%",
     WebkitOverflowScrolling: "touch", // Ajoutez cette ligne pour iOS
-    overflow: "hidden",
+    overflowY: "auto",
     // Dégradé multi-étapes pour éviter les teintes verdâtres
     backgroundImage:
       "linear-gradient(180deg, #87CEEB 0%, #B4E1FF 35%, #FFE5B4 70%, #FFD700 100%)",
